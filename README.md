@@ -17,3 +17,39 @@ Once published, you can install the package via pip:
 ```bash
 pip install dataflics
 ```
+
+## Development
+
+```bash
+source venv/bin/activate
+```
+
+When you’re done working, you can deactivate the virtual environment by simply running:
+
+```bash
+deactivate
+```
+
+To install a package:
+
+```bash
+pip install requests
+```
+
+Freezing dependencies:
+
+```bash
+pip freeze > requirements.txt
+```
+
+Later, someone else (or you on another machine) can install the exact versions of dependencies using:
+
+```bash
+pip install -r requirements.txt
+```
+
+You can also install your package in editable mode if you're developing it:
+
+```bash
+pip install -e .
+```
