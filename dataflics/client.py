@@ -10,13 +10,14 @@ class Client:
         self.base_url = base_url.rstrip("/")
         self.api_key = api_key
 
-    def create_video(self, name: str, colorPalette: str, typography: str, screen: str) -> "Video":
+    def create_video(self, name: str, fps: int, colorPalette: str, typography: str, screen: str) -> "Video":
         """
         Create a new Video instance with the provided parameters.
         """
         from .video import Video  # Lazy import to avoid circular dependencies
         return Video(
             name=name,
+            fps=fps,
             colorPalette=colorPalette,
             typography=typography,
             screen=screen

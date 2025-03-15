@@ -13,6 +13,7 @@ class Video:
     colorPalette: str
     typography: str
     screen: str
+    fps: int
     slides: List[Slide] = field(default_factory=list)
     
     def addSlide(self, slide: Slide) -> None:
@@ -26,27 +27,24 @@ class Video:
         print(f"Color Palette : {self.colorPalette}")
         print(f"Typography    : {self.typography}")
         print(f"Screen        : {self.screen}")
+        print(f"FPS           : {self.fps}")
         print("Slides:")
         if not self.slides:
             print("  No slides available.")
         else:
             for idx, slide in enumerate(self.slides, start=1):
                 print(f"  Slide {idx}:")
-                # Check if the slide has its own pretty_print method.
-                # if hasattr(slide, "pretty_print") and callable(slide.pretty_print):
-                #     slide.pretty_print(indent=4)
-                # else:
-                #     print(f"    {slide}")
                 print(f"    {slide}")
 
 # Example script demonstrating instantiation and usage
 if __name__ == "__main__":
-    # Instantiate a Video object
+    # Instantiate a Video object with fps specified.
     video = Video(
         name="My Awesome Video",
         colorPalette="defaultPalette",
         typography="defaultTypography",
-        screen="defaultScreen"
+        screen="defaultScreen",
+        fps=30
     )
     
     # Create two slide objects
