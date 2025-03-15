@@ -60,8 +60,13 @@ class Video:
         
         # POST to /api/python-videos instead of /api/videos
         response = self.client.post("/api/python-videos", payload)
+
+        print("********")
         print("API Response:", response)
-        
+        print(self.client.base_url)
+        print(response)
+        print("********")
+
         # Update the video object with response data (e.g., video id)
         # for key, value in response.items():
         #     setattr(self, key, value)
