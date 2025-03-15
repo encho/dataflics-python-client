@@ -1,45 +1,69 @@
-# dataflics/video.py
-import json
-from typing import TypedDict, Any, Dict
-from .client import Client
+from dataclasses import dataclass, field
+from typing import List, Union
 
-class VideoOptions(TypedDict):
-    screen: str
-    palette: str
-    typography: str
+from .slides.title01 import Title01
+from .slides.title02 import Title02
 
+# Define a type alias for valid slide types
+Slide = Union[Title01, Title02]
+
+@dataclass
 class Video:
-    def __init__(self, name: str, options: VideoOptions, client: Client) -> None:
-        self.name: str = name
-        self.options: VideoOptions = options
-        self.client: Client = client
-        # You might store additional information returned from the API here
-        self.id = None
+    name: str
+    colorPalette: str
+    typography: str
+    screen: str
+    slides: List[Slide] = field(default_factory=list)
+    
+    def addSlide(self, slide: Slide) -> None:
+        self.slides.append(slide)
+    
+    def pretty_print(self) -> None:
+        """Prints the video details in a humanly readable format."""
+        print("Video Details:")
+        print("--------------")
+        print(f"Name          : {self.name}")
+        print(f"Color Palette : {self.colorPalette}")
+        print(f"Typography    : {self.typography}")
+        print(f"Screen        : {self.screen}")
+        print("Slides:")
+        if not self.slides:
+            print("  No slides available.")
+        else:
+            for idx, slide in enumerate(self.slides, start=1):
+                print(f"  Slide {idx}:")
+                # Check if the slide has its own pretty_print method.
+                # if hasattr(slide, "pretty_print") and callable(slide.pretty_print):
+                #     slide.pretty_print(indent=4)
+                # else:
+                #     print(f"    {slide}")
+                print(f"    {slide}")
 
-    def save(self) -> "Video":
-        """
-        Sends a POST request to create the video, logs the full response data to the console,
-        then GETs the rich video details from the API and logs them in humanly readable formatting.
-        """
-        payload = {
-            "name": self.name,
-            "screenId": self.options.get("screen"),
-            "colorPaletteId": self.options.get("palette"),
-            "typographyId": self.options.get("typography"),
-        }
-        response = self.client.post("/api/videos", payload)
-        # Log the full response data from the POST call.
-        print("API Response:", response)
-        # Update the video object with response data (such as the video id).
-        for key, value in response.items():
-            setattr(self, key, value)
-        
-        # Now, fetch the rich video details using a GET request.
-        # rich_video = self.client.get(f"/api/videos/{self.id}")
-        rich_video: Dict[str, Any] = self.client.get(f"/api/videos/{self.id}")
-
-        # Log the rich video details in a humanly readable (pretty-printed) format.
-        print("Rich Video:")
-        print(json.dumps(rich_video, indent=2))
-        
-        return self
+# Example script demonstrating instantiation and usage
+if __name__ == "__main__":
+    # Instantiate a Video object
+    video = Video(
+        name="My Awesome Video",
+        colorPalette="defaultPalette",
+        typography="defaultTypography",
+        screen="defaultScreen"
+    )
+    
+    # Create two slide objects
+    slide1 = Title01(
+        title="Welcome to the Show",
+        durationInFrames=120
+    )
+    
+    slide2 = Title02(
+        title="Introduction",
+        subtitle="A brief overview",
+        durationInFrames=150
+    )
+    
+    # Add the slides to the video
+    video.addSlide(slide1)
+    video.addSlide(slide2)
+    
+    # Print out the video object in a human-friendly format
+    video.pretty_print()
