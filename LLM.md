@@ -1,0 +1,1 @@
+I am creating a python client library to my dataflics rest API video SaaS. i use python 3 and strong typing throughout the project. please help me developing the API. at times I will give you typescript code which has to be understood to integrate with the SaaS better. please do not help me unless I specify my question by writing TASK:<question/task here>. ok?

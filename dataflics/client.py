@@ -29,3 +29,15 @@ class Client:
         response = requests.post(url, json=data, headers=headers)
         response.raise_for_status()  # Raise an error for bad responses
         return response.json()
+
+    def get(self, endpoint: str) -> Dict[str, Any]:
+        """
+        Helper method to send a GET request to the API.
+        """
+        url = f"{self.base_url}{endpoint}"
+        headers = {"Content-Type": "application/json"}
+        if self.api_key:
+            headers["Authorization"] = f"Bearer {self.api_key}"
+        response = requests.get(url, headers=headers)
+        response.raise_for_status()  # Raise an error for bad responses
+        return response.json()
