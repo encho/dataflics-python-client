@@ -17,6 +17,7 @@ class Client:
         from .video import Video  # Lazy import to avoid circular dependencies
         return Video(
             name=name,
+            client=self,
             fps=fps,
             colorPalette=colorPalette,
             typography=typography,

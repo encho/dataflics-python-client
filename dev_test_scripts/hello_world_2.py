@@ -55,3 +55,5 @@ new_video.addSlide(title_02_slide_again)
 
 # Pretty print the video object along with its slides
 new_video.pretty_print()
+
+new_video.save()
