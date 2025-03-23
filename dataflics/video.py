@@ -45,7 +45,7 @@ class Video:
     def save(self) -> "Video":
         """
         Sends a POST request to create the video via the API backend and prints the response.
-        Uses the /api/python-videos endpoint instead of /api/videos.
+        Uses the /api/videos222 endpoint instead of /api/videos.
         """
         payload: Dict[str, Any] = {
             "name": self.name,
@@ -58,8 +58,8 @@ class Video:
         print("Payload to be sent to API backend:")
         print(payload)
         
-        # POST to /api/python-videos instead of /api/videos
-        response = self.client.post("/api/python-videos", payload)
+        # POST to /api/videos222 instead of /api/videos
+        response = self.client.post("/api/videos222", payload)
 
         print("********")
         print("API Response:", response)
@@ -72,7 +72,7 @@ class Video:
         #     setattr(self, key, value)
         
         # Fetch the rich video details using a GET request from the corresponding endpoint
-        # rich_video: Dict[str, Any] = self.client.get(f"/api/python-videos/{self.id}")
+        # rich_video: Dict[str, Any] = self.client.get(f"/api/videos222/{self.id}")
         # print("Rich Video:")
         # print(json.dumps(rich_video, indent=2))
         
