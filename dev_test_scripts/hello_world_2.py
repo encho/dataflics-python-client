@@ -1,4 +1,5 @@
 import uuid
+from datetime import datetime
 import dataflics
 
 DATAFLICS_BASE_URL = "http://localhost:3000"
@@ -30,8 +31,11 @@ new_video = dataflics.create_video(
 )
 
 # Create slides in a type-safe manner using the re-exported classes
+
+# Instead of a hardcoded title, we display the current date and time.
+current_dt_str = datetime.now().strftime("%Y-%m-%d %H:%M")
 title_01_slide = dataflics.Title01(
-    title="Welcome to the Show",
+    title=current_dt_str,
     durationInFrames=120
 )
 
@@ -47,7 +51,6 @@ title_02_slide_again = dataflics.Title02(
     durationInFrames=150
 )
 
-
 # Add the slides to the video
 new_video.addSlide(title_01_slide)
 new_video.addSlide(title_02_slide)
@@ -57,3 +60,6 @@ new_video.addSlide(title_02_slide_again)
 new_video.pretty_print()
 
 new_video.save()
+
+# Access the computed URL property
+print("Video URL:", new_video.url)

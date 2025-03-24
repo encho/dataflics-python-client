@@ -1,7 +1,6 @@
 # dataflics/video.py
 from dataclasses import dataclass, field, asdict
-from typing import List, Union, Any, Dict, TYPE_CHECKING
-# import json
+from typing import List, Union, Any, Dict, TYPE_CHECKING, Optional
 
 if TYPE_CHECKING:
     from .client import Client
@@ -21,7 +20,8 @@ class Video:
     fps: int
     client: "Client" = field(repr=False)
     slides: List[Slide] = field(default_factory=list)
-    
+    id: Optional[str] = field(init=False, default=None)  # Will be set after saving
+
     def addSlide(self, slide: Slide) -> None:
         self.slides.append(slide)
     
@@ -67,16 +67,20 @@ class Video:
         print(response)
         print("********")
 
-        # Update the video object with response data (e.g., video id)
-        # for key, value in response.items():
-        #     setattr(self, key, value)
-        
-        # Fetch the rich video details using a GET request from the corresponding endpoint
-        # rich_video: Dict[str, Any] = self.client.get(f"/api/videos222/{self.id}")
-        # print("Rich Video:")
-        # print(json.dumps(rich_video, indent=2))
+        # The response is assumed to be the id of the created video object.
+        self.id = str(response)
         
         return self
+
+    @property
+    def url(self) -> Optional[str]:
+        """
+        Returns the URL to access the created video.
+        If the video hasn't been saved (id is None), returns None.
+        """
+        if self.id is None:
+            return None
+        return f"{self.client.base_url}/app/videos222/{self.id}"
 
 # Example script demonstrating instantiation and usage
 if __name__ == "__main__":
@@ -115,3 +119,6 @@ if __name__ == "__main__":
     
     # Save the video, which posts to the API and prints the responses
     video.save()
+
+    # Access the computed URL property
+    print("Video URL:", video.url)
