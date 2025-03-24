@@ -23,9 +23,9 @@ class Video:
         """
         payload = {
             "name": self.name,
-            "screenId": self.options.get("screen"),
-            "colorPaletteId": self.options.get("palette"),
-            "typographyId": self.options.get("typography"),
+            "screen": self.options.get("screen"),
+            "colorPalette": self.options.get("palette"),
+            "typography": self.options.get("typography"),
         }
         response = self.client.post("/api/videos", payload)
         # Log the full response data from the POST call.

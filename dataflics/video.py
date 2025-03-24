@@ -49,9 +49,9 @@ class Video:
         """
         payload: Dict[str, Any] = {
             "name": self.name,
-            "screenId": self.screen,
-            "colorPaletteId": self.colorPalette,
-            "typographyId": self.typography,
+            "screen": self.screen,
+            "colorPalette": self.colorPalette,
+            "typography": self.typography,
             "fps": self.fps,
             "slides": [asdict(slide) for slide in self.slides],
         }
