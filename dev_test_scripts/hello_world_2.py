@@ -24,7 +24,7 @@ video_name = generate_unique_video_name()
 new_video = dataflics.create_video(
     video_name,
     fps=30,
-    colorPalette="colorPalette:fmomzlqk53ufabsq1vjt",
+    colorPalette="colorPalette:1xm9wtr14x2pyrovb797",
     typography="typography:bl5iye1yw2uw2xg2eefn",
     screen="screen:08ppk772i6hkhlshdygh"
 )
