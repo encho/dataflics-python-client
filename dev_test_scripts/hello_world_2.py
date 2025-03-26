@@ -46,7 +46,7 @@ title_02_slide = dataflics.Title02(
 )
 
 title_02_slide_again = dataflics.Title02(
-    title="Introductionhehe",
+    title="Introduction 2",
     subtitle="A brief overview",
     durationInFrames=150
 )
@@ -63,3 +63,5 @@ new_video.save()
 
 # Access the computed URL property
 print("Video URL:", new_video.url)
+
+# new_video.render()
