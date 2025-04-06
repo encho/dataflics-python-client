@@ -4,9 +4,19 @@ from .client import Client
 from .video import Video
 from .slides.title01 import Title01
 from .slides.title02 import Title02
-from .slides.barchart01 import BarChart01
+from .slides.barchart01 import Barchart01
+from .slides.barchart01 import Barchart01Item
 
-__all__ = ["Client", "Video", "Title01", "Title02", "BarChart01", "configure", "create_video"]
+__all__ = [
+    "Client",
+    "Video",
+    "Title01",
+    "Title02",
+    "Barchart01",
+    "Barchart01Item",
+    "configure",
+    "create_video",
+]
 
 # A module-level variable to hold the default client instance
 _default_client: Optional[Client] = None

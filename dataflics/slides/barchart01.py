@@ -1,16 +1,30 @@
 from dataclasses import dataclass, field
-from typing import List
+from typing import List, Dict, Any
 
 @dataclass
-class BarChart01Item:
+class Barchart01Item:
     id: str
     label: str
     value: float
 
+    def serialize(self) -> Dict[str, Any]:
+        return {
+            "id": self.id,
+            "label": self.label,
+            "value": self.value,
+        }
+
 @dataclass
-class BarChart01:
-    # The slide type is fixed to "barchart-01"
+class Barchart01:
     type: str = field(init=False, default="barchart-01")
     title: str
     durationInFrames: int
-    data: List[BarChart01Item]
+    data: List[Barchart01Item]
+
+    def serialize(self) -> Dict[str, Any]:
+        return {
+            "type": self.type,
+            "title": self.title,
+            "durationInFrames": self.durationInFrames,
+            "data": [item.serialize() for item in self.data],
+        }

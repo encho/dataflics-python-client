@@ -1,5 +1,5 @@
 # dataflics/video.py
-from dataclasses import dataclass, field, asdict
+from dataclasses import dataclass, field
 from typing import List, Union, Any, Dict, TYPE_CHECKING, Optional
 
 if TYPE_CHECKING:
@@ -7,9 +7,10 @@ if TYPE_CHECKING:
 
 from .slides.title01 import Title01
 from .slides.title02 import Title02
+from .slides.barchart01 import Barchart01
 
 # Define a type alias for valid slide types
-Slide = Union[Title01, Title02]
+Slide = Union[Title01, Title02, Barchart01]
 
 @dataclass
 class Video:
@@ -41,24 +42,19 @@ class Video:
             for idx, slide in enumerate(self.slides, start=1):
                 print(f"  Slide {idx}:")
                 print(f"    {slide}")
-    
+
     def save(self) -> "Video":
-        """
-        Sends a POST request to create the video via the API backend and prints the response.
-        Uses the /api/videos222 endpoint instead of /api/videos.
-        """
         payload: Dict[str, Any] = {
             "name": self.name,
             "screen": self.screen,
             "colorPalette": self.colorPalette,
             "typography": self.typography,
             "fps": self.fps,
-            "slides": [asdict(slide) for slide in self.slides],
+            "slides": [slide.serialize() for slide in self.slides],
         }
         print("Payload to be sent to API backend:")
         print(payload)
-        
-        # POST to /api/videos222 instead of /api/videos
+
         response = self.client.post("/api/videos222", payload)
 
         print("********")
@@ -67,10 +63,10 @@ class Video:
         print(response)
         print("********")
 
-        # The response is assumed to be the id of the created video object.
         self.id = str(response)
-        
+
         return self
+
 
     @property
     def url(self) -> Optional[str]:

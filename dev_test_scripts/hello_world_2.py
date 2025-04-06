@@ -5,7 +5,7 @@ import dataflics
 DATAFLICS_BASE_URL = "http://localhost:3000"
 
 # Configure the library with your API endpoint (and API key if needed)
-dataflics.configure(DATAFLICS_BASE_URL, api_key="YOUR_API_KEY")
+dataflics.configure(DATAFLICS_BASE_URL, api_key="ENCHO81")
 
 
 def generate_unique_video_name() -> str:
@@ -45,16 +45,38 @@ title_02_slide = dataflics.Title02(
     durationInFrames=150
 )
 
-title_02_slide_again = dataflics.Title02(
-    title="Introduction 2",
-    subtitle="A brief overview",
-    durationInFrames=150
+barchart_01_slide = dataflics.Barchart01(
+    title="German Cities",
+    durationInFrames=150,
+    data=[
+        dataflics.Barchart01Item(
+            id="ffm",
+            label="Frankfurt",
+            value=980,
+        ),
+        dataflics.Barchart01Item(
+            id="mun",
+            label="Munich",
+            value=980,
+        ),
+        dataflics.Barchart01Item(
+            id="ber",
+            label="Berlin",
+            value=1000,
+        ),
+        dataflics.Barchart01Item(
+            id="hh",
+            label="Hamburg",
+            value=800,
+        ),
+    ],
 )
+
 
 # Add the slides to the video
 new_video.addSlide(title_01_slide)
 new_video.addSlide(title_02_slide)
-new_video.addSlide(title_02_slide_again)
+new_video.addSlide(barchart_01_slide)
 
 # Pretty print the video object along with its slides
 new_video.pretty_print()
