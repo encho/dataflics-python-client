@@ -11,7 +11,7 @@ long_description = (here / "README.md").read_text(encoding="utf-8")
 
 setup(
     name="dataflics",
-    version="0.1.1",  # Update the version for a new release
+    version="0.2.1",  # Update the version for a new release
     packages=find_packages(),
     install_requires=["requests"],
     description="A Python client library for creating videos via the dataflics.com platform.",
@@ -61,12 +61,22 @@ username = __token__
 password = pypi-<your-test-token>
 ```
 
+```bash
+twine upload --config-file ./.pypirc --repository testpypi dist/*
+```
+
 ## 4. Test the Installation from TestPyPI
 
 Create or activate a new virtual environment and install your package from TestPyPI:
 
 ```bash
 pip install --upgrade --index-url https://test.pypi.org/simple/ dataflics
+```
+
+OR, force reinstall:
+
+```bash
+pip install --force-reinstall --index-url https://test.pypi.org/simple/ dataflics
 ```
 
 ## 5. Upload to Production PyPI

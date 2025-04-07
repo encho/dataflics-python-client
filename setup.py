@@ -7,7 +7,7 @@ long_description = (here / "README.md").read_text(encoding="utf-8")
 
 setup(
     name="dataflics",
-    version="0.2.0",
+    version="0.3.0",
     packages=find_packages(),
     install_requires=["requests"],
     description="A Python client library for creating videos via the dataflics.com platform.",

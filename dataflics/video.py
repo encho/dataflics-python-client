@@ -55,7 +55,7 @@ class Video:
         print("Payload to be sent to API backend:")
         print(payload)
 
-        response = self.client.post("/api/videos222", payload)
+        response = self.client.post("/api/videos", payload)
 
         print("********")
         print("API Response:", response)
@@ -76,7 +76,7 @@ class Video:
         """
         if self.id is None:
             return None
-        return f"{self.client.base_url}/app/videos222/{self.id}"
+        return f"{self.client.base_url}/app/videos/{self.id}"
 
 # Example script demonstrating instantiation and usage
 if __name__ == "__main__":
