@@ -19,6 +19,7 @@ class Barchart01:
     type: str = field(init=False, default="barchart-01")
     title: str
     durationInFrames: int
+    formatString: str
     data: List[Barchart01Item]
 
     def serialize(self) -> Dict[str, Any]:
@@ -26,5 +27,6 @@ class Barchart01:
             "type": self.type,
             "title": self.title,
             "durationInFrames": self.durationInFrames,
+            "formatString": self.formatString,
             "data": [item.serialize() for item in self.data],
         }

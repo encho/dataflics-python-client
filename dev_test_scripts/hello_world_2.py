@@ -48,6 +48,7 @@ title_02_slide = dataflics.Title02(
 barchart_01_slide = dataflics.Barchart01(
     title="German Cities",
     durationInFrames=150,
+    formatString="0.0",
     data=[
         dataflics.Barchart01Item(
             id="ffm",
